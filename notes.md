@@ -35,6 +35,7 @@ const config = {
 
 - [ ] Deploy (Vercel)
 - [ ] Scaffold basic UI w/ mock data
+- [ ] Tidy up build process
 - [ ] Set up database (Vercel Postgres)
 - [ ] Attach database to UI
 - [ ] Auth (Clerk)
@@ -44,3 +45,40 @@ const config = {
 - [ ] Delete button (Server Actions)
 - [ ] Analytics (Posthog)
 - [ ] Ratelimiting (Upstash)
+
+---
+
+## Deploy App and Basic UI
+
+Adjusted Vercel/Github permissions to add t3gallery repo.
+
+add temp db env value to vercel to meet deploy requirements
+
+register UploadThing account to manage images
+
+add top nav component, add mock-image data, show images on homepage
+
+## Tidy Up Build Process
+
+### Ignore Typescript and ESLint errors during build.
+
+Instead of blocking our build process with these errors, handle these errors separately.
+
+```js
+/** @type {import("next").NextConfig} */
+const config = {
+  outputFileTracingRoot: import.meta.dirname,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
+```
+
+### TurboPack
+
+Add `--turbo` flag to run project even faster
+
+> "Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js. You can use Turbopack with both the Pages and App Router for a much faster local development experience." [docs](https://nextjs.org/docs/app/api-reference/turbopack)
