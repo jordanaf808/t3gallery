@@ -9,7 +9,6 @@ export default async function HomePage() {
   const images = await db.query.images.findMany({
     orderBy: (model, { desc }) => desc(model.id),
   });
-  console.log("//// images: ", images);
 
   return (
     <main className="">

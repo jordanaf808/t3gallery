@@ -37,7 +37,7 @@ const config = {
 - [✅] Scaffold basic UI w/ mock data
 - [✅] Tidy up build process
 - [✅] Set up database (Vercel Postgres)
-- [ ] Attach database to UI
+- [✅] Attach database to UI
 - [ ] Auth (Clerk)
 - [ ] Image Upload
 - [ ] Error Management (Sentry)
@@ -173,3 +173,40 @@ Update schema from posts to images
 ```
 
 _Note_ It is best to make db changes like this in a dev environment, because this will break production.
+
+---
+
+## Auth
+
+[Install Clerk](https://clerk.com/docs/nextjs/getting-started/quickstart)
+
+Theo mentions Clerk 2 Beta, but that seems to be standard now.
+
+[Add Auth](https://clerk.com/docs/reference/nextjs/clerk-middleware#protect-routes-based-on-authentication-status)
+
+Import ClerkProvider and other auth components into Root Layout
+
+```tsx
+<ClerkProvider>
+  <html lang="en" className={`font-sans ${geist.variable}`}>
+    <body className="flex flex-col gap-4">
+      <TopNav>
+        <SignedOut>
+          <SignInButton />
+          <SignUpButton></SignUpButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </TopNav>
+      {children}
+    </body>
+  </html>
+</ClerkProvider>
+```
+
+### Build out TopNav
+
+When you use an underscore in front of the folder name in App Router, it tells the router to not include in routing. This is useful for adding components related to the route.
+
+`src/app/_components`
