@@ -1,7 +1,9 @@
 // import Link from "next/link";
-
-import Image from "next/image";
+// import { headers } from "next/headers";
+// import Image from "next/image";
 import { db } from "~/server/db";
+
+export const dynamic = "force-dynamic";
 
 const mockURLs = [
   "https://sgz4kbejt6.ufs.sh/f/DJeyGlYaJNrUNxDIuDJnlCmP2qUVp5sXx8Mwa3HdkoW4buzj",

@@ -36,8 +36,8 @@ const config = {
 - [✅] Deploy (Vercel)
 - [✅] Scaffold basic UI w/ mock data
 - [✅] Tidy up build process
-- [ ] Set up database (Vercel Postgres)
-- [ ] Attach database to UI
+- [✅] Set up database (Vercel Postgres)
+- [✅] Attach database to UI
 - [ ] Auth (Clerk)
 - [ ] Image Upload
 - [ ] Error Management (Sentry)
@@ -57,6 +57,8 @@ add temp db env value to vercel to meet deploy requirements
 register UploadThing account to manage images
 
 add top nav component, add mock-image data, show images on homepage
+
+---
 
 ## Tidy Up Build Process
 
@@ -82,6 +84,8 @@ const config = {
 Add `--turbo` flag to run project even faster
 
 > "Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js. You can use Turbopack with both the Pages and App Router for a much faster local development experience." [docs](https://nextjs.org/docs/app/api-reference/turbopack)
+
+---
 
 ## Set Up Database
 
@@ -137,3 +141,20 @@ export default async function HomePage() {
 This function is actually run on the server!
 
 Previously in React, using SSR, your components ran on the server and the client, now with Server Components it only runs on the server.
+
+---
+
+## Dynamic Routes
+
+With Next.js, when you first hit the webpage it is cached on the server, when you hit refresh, unless anything has changed, you are given a cached response. This is because Next is treating this as a _Static_ page, not _Dynamic_.
+
+To make this a _Dynamic_ page you must do something in the route that is unique to the end user. For example, performing authentication, or grabbing the header info of the http request, these actions return a unique response for each user.
+
+We can also configure the behavior of this route by exporting the `dynamic` variable with the option we want to use:
+
+```js
+// prevents route from being cached
+export const dynamic = "force-dynamic";
+```
+
+[Docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
