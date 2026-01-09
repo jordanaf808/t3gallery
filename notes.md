@@ -37,7 +37,7 @@ const config = {
 - [✅] Scaffold basic UI w/ mock data
 - [✅] Tidy up build process
 - [✅] Set up database (Vercel Postgres)
-- [✅] Attach database to UI
+- [ ] Attach database to UI
 - [ ] Auth (Clerk)
 - [ ] Image Upload
 - [ ] Error Management (Sentry)
