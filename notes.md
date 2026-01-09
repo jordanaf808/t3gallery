@@ -33,9 +33,9 @@ const config = {
 
 ## To-Do List
 
-- [ ] Deploy (Vercel)
-- [ ] Scaffold basic UI w/ mock data
-- [ ] Tidy up build process
+- [✅] Deploy (Vercel)
+- [✅] Scaffold basic UI w/ mock data
+- [✅] Tidy up build process
 - [ ] Set up database (Vercel Postgres)
 - [ ] Attach database to UI
 - [ ] Auth (Clerk)
@@ -82,3 +82,58 @@ const config = {
 Add `--turbo` flag to run project even faster
 
 > "Turbopack is an incremental bundler optimized for JavaScript and TypeScript, written in Rust, and built into Next.js. You can use Turbopack with both the Pages and App Router for a much faster local development experience." [docs](https://nextjs.org/docs/app/api-reference/turbopack)
+
+## Set Up Database
+
+Create and connect DB to this project
+
+Select from variety of db providers
+
+I chose Neon (similar to the tutorial) and create env variable POSTGRES_URL
+
+Change Vercel and DB location to Portland
+
+Copy Drizzle ORM code snippet from Vercel/Neon storage setup into `server/index.ts` (see code snippet below to see my modified version)
+
+```ts
+// src/server/db/index.ts
+import * as schema from "./schema";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+import { config } from "dotenv";
+
+config({ path: ".env" }); // or .env.local
+
+// updated env reference for clarity
+// const sql = neon(process.env.DATABASE_URL!);
+const sql = neon(process.env.POSTGRES_URL!);
+export const db = drizzle({ client: sql, schema: schema });
+```
+
+Install missing packages for snippet above
+
+- `pnpm install @neondatabase/serverless`
+
+- `pnpm i dotenv`
+
+Push DB
+
+`pnpm run db:push`
+
+Go to DB Dashboard
+
+`pnpn db:studio`
+
+### Fetch items from DB
+
+```tsx
+export default async function HomePage() {
+  const posts = await db.query.posts.findMany();
+  console.log("//// POSTS: ", posts); // But wait... this doesn't print to the console???
+  //...
+}
+```
+
+This function is actually run on the server!
+
+Previously in React, using SSR, your components ran on the server and the client, now with Server Components it only runs on the server.
