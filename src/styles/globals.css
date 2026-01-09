@@ -9,3 +9,8 @@
 body {
   @apply bg-black text-white;
 }
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+}
