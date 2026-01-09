@@ -11,11 +11,14 @@ import { index, pgTableCreator } from "drizzle-orm/pg-core";
  */
 export const createTable = pgTableCreator((name) => `t3gallery_${name}`);
 
-export const posts = createTable(
-  "post",
+export const images = createTable(
+  "image",
   (d) => ({
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
-    name: d.varchar({ length: 256 }),
+    // Use .notNull() to require that data.
+    name: d.varchar("name", { length: 256 }).notNull(),
+    //  Add url field and increase length to 1024. We could index this field to filter based on url, but unused db indexes are bad.
+    url: d.varchar("url", { length: 1024 }).notNull(),
     createdAt: d
       .timestamp({ withTimezone: true })
       .$defaultFn(() => /* @__PURE__ */ new Date())

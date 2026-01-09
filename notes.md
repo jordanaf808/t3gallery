@@ -158,3 +158,18 @@ export const dynamic = "force-dynamic";
 ```
 
 [Docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)
+
+---
+
+## DB Schema
+
+Update schema from posts to images
+
+```js
+  // Use .notNull() to require that data.
+  name: d.varchar("name", { length: 256 }).notNull(),
+  //  Add url field and increase length to 1024. We could index this field to filter based on url, but unused db indexes are bad.
+  url: d.varchar("url", { length: 1024 }).notNull(),
+```
+
+_Note_ It is best to make db changes like this in a dev environment, because this will break production.
