@@ -38,7 +38,7 @@ const config = {
 - [✅] Tidy up build process
 - [✅] Set up database (Vercel Postgres)
 - [✅] Attach database to UI
-- [ ] Auth (Clerk)
+- [✅] Auth (Clerk)
 - [ ] Image Upload
 - [ ] Error Management (Sentry)
 - [ ] Routing/Image page (parallel routes in new Next App Router)
@@ -205,8 +205,10 @@ Import ClerkProvider and other auth components into Root Layout
 </ClerkProvider>
 ```
 
+> Don't forget to add required secrets to local and vercel env files as well.
+
 ### Build out TopNav
 
-When you use an underscore in front of the folder name in App Router, it tells the router to not include in routing. This is useful for adding components related to the route.
+When you use an underscore `_` in front of the folder name in App Router, it tells the router to not include in routing. This is useful for adding components related to a route.
 
 `src/app/_components`
