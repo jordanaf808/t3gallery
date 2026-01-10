@@ -3,6 +3,7 @@
 // import Image from "next/image";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { db } from "~/server/db";
+import { UploadButton } from "~/utils/uploadthing";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +33,18 @@ export default async function HomePage() {
         </div>
       </SignedOut>
       <SignedIn>
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            // Do something with the response
+            console.log("Files: ", res);
+            alert("Upload Completed");
+          }}
+          onUploadError={(error: Error) => {
+            // Do something with the error.
+            alert(`ERROR! ${error.message}`);
+          }}
+        />
         <Images />
       </SignedIn>
     </main>

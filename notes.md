@@ -249,3 +249,13 @@ Usually you'd have to spin up your own s3 bucket to store your image data, but U
 Copy over .env variables
 
 > _note_ - Uploadthing made changes on update from v6 to v7, including reducing env variables to just one key:value. [docs](https://docs.uploadthing.com/v7)
+
+### Add Route
+
+Create `src/app/api/uploadthing` routes
+
+Copy over UploadThing file router component code from docs and add Clerk Auth to `uploadthing/core.ts` route
+
+Copy over `uploadthing/route` code from docs.
+
+We import the file-router from core.ts, which route.ts will use to handle requests that we get on the `api/uploadthing` route [docs](https://nextjs.org/docs/app/getting-started/route-handlers)
