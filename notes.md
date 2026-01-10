@@ -4,6 +4,25 @@
 
 ### (RSCs, Next.js, Shadui, Drizzle, TS and more)
 
+## To-Do List
+
+- [✅] Deploy (Vercel)
+- [✅] Scaffold basic UI w/ mock data
+- [✅] Tidy up build process
+- [✅] Set up database (Vercel Postgres)
+- [✅] Attach database to UI
+- [✅] Auth (Clerk)
+- [ ] Image Upload
+- [ ] Use Next/Image component
+- [ ] "taint" (server-only) ???
+- [ ] Error Management (Sentry)
+- [ ] Routing/Image page (parallel routes in new Next App Router)
+- [ ] Delete button (Server Actions)
+- [ ] Analytics (Posthog)
+- [ ] Ratelimiting (Upstash)
+
+---
+
 ## Init (3:30)
 
 Use `pnpm create t3-app@latest` with Typescript, but not tRPC or Auth at this point.
@@ -30,21 +49,6 @@ const config = {
   outputFileTracingRoot: import.meta.dirname,
 };
 ```
-
-## To-Do List
-
-- [✅] Deploy (Vercel)
-- [✅] Scaffold basic UI w/ mock data
-- [✅] Tidy up build process
-- [✅] Set up database (Vercel Postgres)
-- [✅] Attach database to UI
-- [✅] Auth (Clerk)
-- [ ] Image Upload
-- [ ] Error Management (Sentry)
-- [ ] Routing/Image page (parallel routes in new Next App Router)
-- [ ] Delete button (Server Actions)
-- [ ] Analytics (Posthog)
-- [ ] Ratelimiting (Upstash)
 
 ---
 
@@ -207,8 +211,41 @@ Import ClerkProvider and other auth components into Root Layout
 
 > Don't forget to add required secrets to local and vercel env files as well.
 
-### Build out TopNav
+### Route Component
 
-When you use an underscore `_` in front of the folder name in App Router, it tells the router to not include in routing. This is useful for adding components related to a route.
+When you use an underscore `_` in front of the folder name in App Router, it tells the router to not include in routing. This is useful for adding components related to a route. Move TopNav to it's own route component
 
-`src/app/_components`
+`src/app/_components/topnav.tsx`
+
+### Conditionally Show Images
+
+Move the image gallery to it's own component and wrap it around Clerk's Auth components to conditionally show the gallery based on whether the user is logged in or not.
+
+```tsx
+export default async function HomePage() {
+  return (
+    <main className="">
+      <SignedOut>
+        <div className="h-full w-full text-center text-2xl">
+          Please Sign In Above...
+        </div>
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
+    </main>
+  );
+}
+```
+
+---
+
+## Image Upload
+
+### UploadThing
+
+Usually you'd have to spin up your own s3 bucket to store your image data, but UploadThing makes that process much easier
+
+Copy over .env variables
+
+> _note_ - Uploadthing made changes on update from v6 to v7, including reducing env variables to just one key:value. [docs](https://docs.uploadthing.com/v7)

@@ -5,3 +5,4 @@ ignoredBuiltDependencies:
 onlyBuiltDependencies:
   - '@clerk/shared'
   - esbuild
+  - msgpackr-extract
