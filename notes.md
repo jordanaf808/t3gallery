@@ -259,3 +259,7 @@ Copy over UploadThing file router component code from docs and add Clerk Auth to
 Copy over `uploadthing/route` code from docs.
 
 We import the file-router from core.ts, which route.ts will use to handle requests that we get on the `api/uploadthing` route [docs](https://nextjs.org/docs/app/getting-started/route-handlers)
+
+### Add Components
+
+Add UploadButton and Dropzone components to `src/utils/uploadthing.ts` and import to homepage.

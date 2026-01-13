@@ -1,7 +1,7 @@
 // Example model schema from the Drizzle docs
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
-import { index, pgTableCreator } from "drizzle-orm/pg-core";
+import { index, pgTableCreator, varchar } from "drizzle-orm/pg-core";
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
@@ -17,6 +17,8 @@ export const images = createTable(
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
     // Use .notNull() to require that data.
     name: d.varchar("name", { length: 256 }).notNull(),
+    // add userId
+    userId: varchar("userId", { length: 256 }).notNull(),
     //  Add url field and increase length to 1024. We could index this field to filter based on url, but unused db indexes are bad.
     url: d.varchar("url", { length: 1024 }).notNull(),
     createdAt: d
